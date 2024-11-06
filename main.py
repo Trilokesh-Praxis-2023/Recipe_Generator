@@ -40,7 +40,7 @@ st.markdown(
     """
     <style>
     body {
-        background-image: url("https://img.freepik.com/free-vector/abstract-technology-betwork-wire-mesh-background_1017-17263.jpg");
+        background-image: url("https://cdn.pixabay.com/photo/2024/06/01/14/00/ai-8802304_1280.jpg");
         background-size: cover;
         background-attachment: fixed;
     }
