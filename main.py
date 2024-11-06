@@ -2,6 +2,9 @@ import streamlit as st
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
+# Check if CUDA is available
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 # Load pre-trained model and tokenizer (checking the loading process)
 model_name = "EleutherAI/gpt-neo-1.3B"
 
@@ -9,6 +12,7 @@ model_name = "EleutherAI/gpt-neo-1.3B"
 try:
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name)
+    model.to(device)  # Move the model to GPU if available
     st.success("Model and tokenizer loaded successfully.")
 except Exception as e:
     st.error(f"Error loading the model and tokenizer: {str(e)}")
@@ -19,6 +23,10 @@ tokenizer.pad_token = tokenizer.eos_token
 # Function to generate a detailed recipe
 def generate_detailed_recipe(prompt, max_length=400):
     inputs = tokenizer(prompt, return_tensors="pt", padding=True)
+    
+    # Move input tensors to the same device as the model (GPU if available)
+    inputs = {key: value.to(device) for key, value in inputs.items()}
+
     outputs = model.generate(
         inputs['input_ids'], 
         attention_mask=inputs['attention_mask'],
@@ -27,6 +35,7 @@ def generate_detailed_recipe(prompt, max_length=400):
         temperature=0.6,
         pad_token_id=tokenizer.eos_token_id
     )
+    
     recipe = tokenizer.decode(outputs[0], skip_special_tokens=True)
     
     # Formatting the output for readability
