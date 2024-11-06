@@ -69,4 +69,3 @@ if st.button("Generate Recipe"):
     else:
         st.warning("Please enter a prompt.")
 
-update to make the text black and make the backgroung more colourful
