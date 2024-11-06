@@ -3,16 +3,14 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
 # Load pre-trained model and tokenizer
-# model_name = "EleutherAI/gpt-neo-1.3B"  # Or try "EleutherAI/gpt-neo-125M"
-model_name = "EleutherAI/gpt-neo-125M"  # Or try "EleutherAI/gpt-neo-125M"
-
+model_name = "EleutherAI/gpt-neo-1.3B"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
 
 # Set pad_token to eos_token if not already set
 tokenizer.pad_token = tokenizer.eos_token
 
-# Function to generate a more detailed recipe
+# Function to generate a detailed recipe
 def generate_detailed_recipe(prompt, max_length=400):
     inputs = tokenizer(prompt, return_tensors="pt", padding=True)
     outputs = model.generate(
@@ -40,54 +38,55 @@ def generate_detailed_recipe(prompt, max_length=400):
 # Streamlit UI
 st.set_page_config(page_title="AI Recipe Generator", layout="centered")
 st.markdown(
-    """
+    f"""
     <style>
     /* Background Image */
-    .stApp {
-        background-image: url('https://images.unsplash.com/photo-1512058564366-c9a2f15f0b06?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDd8fGZvb2QlMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTY1MjUwNTAyOA&ixlib=rb-1.2.1&q=80&w=1080');
+    .stApp {{
+        background-image: url('https://img.freepik.com/free-vector/abstract-technology-betwork-wire-mesh-background_1017-17263.jpg');
         background-size: cover;
-    }
+        background-attachment: fixed;
+    }}
 
     /* Container Styling */
-    .stMarkdown, .stButton, .stTextInput, .stSpinner {
+    .stMarkdown, .stButton, .stTextInput, .stSpinner {{
         background: rgba(255, 255, 255, 0.8);
         padding: 10px;
         border-radius: 10px;
-    }
+    }}
     
     /* Fonts and Headings */
-    h1, h2, h3 {
-        color: #ff6347; /* Tomato color */
+    h1, h2, h3 {{
+        color: #ff6347;
         font-family: 'Arial', sans-serif;
-    }
-    p, label {
+    }}
+    p, label {{
         color: #ffffff;
         font-family: 'Verdana', sans-serif;
-    }
+    }}
 
     /* Text Input Box */
-    .stTextInput {
+    .stTextInput {{
         width: 100%;
         padding: 12px;
         border: none;
         border-radius: 5px;
         box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    }
+    }}
 
     /* Button */
-    .stButton>button {
+    .stButton>button {{
         background-color: #ff6347;
         color: white;
         font-size: 16px;
         padding: 10px 20px;
         border-radius: 5px;
-    }
+    }}
 
     /* Spinner Styling */
-    .stSpinner {
+    .stSpinner {{
         color: #ff6347;
         font-weight: bold;
-    }
+    }}
     </style>
     """, 
     unsafe_allow_html=True
