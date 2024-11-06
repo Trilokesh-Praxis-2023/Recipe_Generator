@@ -3,7 +3,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
 # Load pre-trained model and tokenizer
-model_name = "distilgpt2"
+model_name = "EleutherAI/gpt-neo-1.3B"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
 
