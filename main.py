@@ -42,9 +42,8 @@ st.markdown(
     <style>
     /* Background Image */
     .stApp {{
-        background-image: url('https://img.freepik.com/free-vector/abstract-technology-betwork-wire-mesh-background_1017-17263.jpg');
+        background: url("https://img.freepik.com/free-vector/abstract-technology-betwork-wire-mesh-background_1017-17263.jpg") no-repeat center center fixed;
         background-size: cover;
-        background-attachment: fixed;
     }}
 
     /* Container Styling */
