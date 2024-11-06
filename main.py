@@ -2,10 +2,16 @@ import streamlit as st
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
-# Load pre-trained model and tokenizer
+# Load pre-trained model and tokenizer (checking the loading process)
 model_name = "EleutherAI/gpt-neo-1.3B"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name)
+
+# Loading the tokenizer and model
+try:
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(model_name)
+    st.success("Model and tokenizer loaded successfully.")
+except Exception as e:
+    st.error(f"Error loading the model and tokenizer: {str(e)}")
 
 # Set pad_token to eos_token if not already set
 tokenizer.pad_token = tokenizer.eos_token
@@ -68,4 +74,3 @@ if st.button("Generate Recipe"):
             st.markdown(recipe)
     else:
         st.warning("Please enter a prompt.")
-
