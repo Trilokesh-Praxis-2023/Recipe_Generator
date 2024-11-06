@@ -2,8 +2,8 @@ import streamlit as st
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
-# Load pre-trained model and tokenizer (smaller model)
-model_name = "gpt2"  # Smaller model
+# Load pre-trained model and tokenizer
+model_name = "EleutherAI/gpt-neo-1.3B"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
 
@@ -35,28 +35,19 @@ def generate_detailed_recipe(prompt, max_length=400):
 
     return formatted_recipe
 
-# Embed HTML for background and text styling
+# Embed HTML for background
 st.markdown(
     """
     <style>
     body {
-        background: linear-gradient(to right, #ff7e5f, #feb47b);
+        background-image: url("https://cdn.pixabay.com/photo/2024/06/01/14/00/ai-8802304_1280.jpg");
         background-size: cover;
         background-attachment: fixed;
     }
     .stApp {
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.8);
         padding: 20px;
         border-radius: 10px;
-    }
-    .stMarkdown {
-        color: black;
-    }
-    h1, h2, h3, h4, h5, h6 {
-        color: black;
-    }
-    .stTextInput input {
-        color: black;
     }
     </style>
     """,
@@ -77,3 +68,5 @@ if st.button("Generate Recipe"):
             st.markdown(recipe)
     else:
         st.warning("Please enter a prompt.")
+
+update to make the text black and make the backgroung more colourful
