@@ -35,19 +35,28 @@ def generate_detailed_recipe(prompt, max_length=400):
 
     return formatted_recipe
 
-# Embed HTML for background
+# Embed HTML for background and text styling
 st.markdown(
     """
     <style>
     body {
-        background-image: url("https://cdn.pixabay.com/photo/2024/06/01/14/00/ai-8802304_1280.jpg");
+        background: linear-gradient(to right, #ff7e5f, #feb47b);
         background-size: cover;
         background-attachment: fixed;
     }
     .stApp {
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.9);
         padding: 20px;
         border-radius: 10px;
+    }
+    .stMarkdown {
+        color: black;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: black;
+    }
+    .stTextInput input {
+        color: black;
     }
     </style>
     """,
