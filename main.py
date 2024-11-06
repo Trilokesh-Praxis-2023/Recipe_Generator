@@ -2,8 +2,8 @@ import streamlit as st
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
-# Load pre-trained model and tokenizer
-model_name = "EleutherAI/gpt-neo-1.3B"
+# Load pre-trained model and tokenizer (smaller model)
+model_name = "EleutherAI/gpt-neo-125M"  # Smaller model
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
 
